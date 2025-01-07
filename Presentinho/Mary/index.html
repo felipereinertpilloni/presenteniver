@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Aniversário!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #ffcccb;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .gallery, .curiosities, .art-section, .interactive-space, .quotes {
+            margin: 20px;
+        }
+        .gallery img {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            margin: 10px;
+        }
+        .interactive-space canvas {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border: 1px solid black;
+            display: block;
+            margin: 0 auto;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        blockquote {
+            font-style: italic;
+            margin: 10px 0;
+        }
+        @media (max-width: 600px) {
+            .header {
+                padding: 15px;
+            }
+            .gallery img {
+                max-width: 150px;
+            }
+            .interactive-space canvas {
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Feliz 16º Aniversário!</h1>
+        <p>Parabéns! Espero que você tenha um dia maravilhoso!</p>
+    </div>
+
+    <div class="gallery">
+        <h2>Galeria de Cachorros Fofos</h2>
+        <img src="https://love.doghero.com.br/wp-content/uploads/2019/09/Golden.jpg.jpg" alt="Cachorro fofo 1">
+        <img src="https://cdn.pixabay.com/photo/2017/09/25/13/12/dog-2785074_960_720.jpg" alt="Cachorro fofo 2">
+        <img src="https://optimumpet.com.br/media/uploads/2023/11/racas-de-cachorro-pequeno-chihuahua-scaled.webp" alt="Cachorro fofo 3">
+    </div>
+
+    <div class="curiosities">
+        <h2>Curiosidades sobre Cachorros</h2>
+        <ul>
+            <li>Os cachorros podem sentir cheiros 10.000 a 100.000 vezes melhor que os humanos.</li>
+            <li>O nariz de um cachorro é único, assim como as impressões digitais dos humanos.</li>
+        </ul>
+    </div>
+
+    <div class="art-section">
+        <h2>Arte Contemporânea e Xing Xong Kpop</h2>
+        <p>Aqui estão algumas pinturas de artistas contemporâneos que você pode gostar:</p>
+        <img src="https://artlogic-res.cloudinary.com/w_1050,c_limit,f_auto,fl_lossy,q_auto/ws-zippergaleria/usr/images/blog_entries/main_image/items/9f/9faf6d7a5ed848c2acee08df35542a10/zipper_24-6-2022_ph-julia-thompson_08.jpg" alt="Arte Contemporânea 1">
+        <img src="https://janainatorres.com.br/wp-content/uploads/2023/02/image.jpeg" alt="Arte Contemporânea 2">
+        <p>E aqui está uma citação inspiradora de Demi Lovato:</p>
+        <blockquote>“Não pense que não vai dar certo.
+            Espero que você tenha a capacidade de encontrar mais alegria nas pequenas coisas.
+            Não perca nem mesmo as menores coisas.
+            Se você continuar encontrando maneiras de rir e ficar feliz com isso, essas pequenas alegrias continuarão vindo à mente.
+            E com isso, as tensões desaparecem uma a uma.
+            Eu espero que você esteja feliz.”
+            -Hwang Hyunjin
+        </blockquote>
+    </div>
+
+    <div class="interactive-space">
+        <h2>Espaço Interativo</h2>
+        <canvas id="paintCanvas" width="500" height="300"></canvas>
+        <script>
+            const canvas = document.getElementById('paintCanvas');
+            const ctx = canvas.getContext('2d');
+            let painting = false;
+
+            function getEventPosition(event) {
+                const rect = canvas.getBoundingClientRect();
+                if (event.touches) {
+                    return {
+                        x: event.touches[0].clientX - rect.left,
+                        y: event.touches[0].clientY - rect.top
+                    };
+                } else {
+                    return {
+                        x: event.clientX - rect.left,
+                        y: event.clientY - rect.top
+                    };
+                }
+            }
+
+            function startPosition(event) {
+                painting = true;
+                draw(event);
+            }
+
+            function endPosition() {
+                painting = false;
+                ctx.beginPath();
+            }
+
+            function draw(event) {
+                if (!painting) return;
+                event.preventDefault();
+                const position = getEventPosition(event);
+                ctx.lineWidth = 5;
+                ctx.lineCap = 'round';
+                ctx.strokeStyle = 'black';
+
+                ctx.lineTo(position.x, position.y);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(position.x, position.y);
+            }
+
+            canvas.addEventListener('mousedown', startPosition);
+            canvas.addEventListener('mouseup', endPosition);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('touchstart', startPosition);
+            canvas.addEventListener('touchend', endPosition);
+            canvas.addEventListener('touchmove', draw);
+        </script>
+    </div>
+
+    <div class="quotes">
+        <h2>Frases Inspiradoras</h2>
+        <p>“A arte nos permite encontrar a si mesmo e perder-se ao mesmo tempo.” - Thomas Merton</p>
+        <p>“A melhor forma de prever o futuro é criá-lo.” - Abraham Lincoln</p>
+    </div>
+</body>
+
+<div class="link">
+    <h2>Convite Especial</h2>
+    <p><a href="parabens.html" target="_blank">Clique aqui para um convite especial!</a></p>
+</div>
+
+</html>
